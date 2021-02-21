@@ -1,32 +1,49 @@
 package com.flight.system;
 
+import javax.security.auth.login.Configuration;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.TimeUnit;
+import java.util.logging.FileHandler;
+import java.util.logging.Handler;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 import java.util.stream.Collectors;
 
-public class DataReader implements Runnable{
 
-    private final static String PIPE_DELIMITER = "\\|";
-    private final static String fileName = "data/FlightsData.csv";
+public class DataReader implements Runnable {
+
+    private final static String PIPE_DELIMITER = ConfigurationLoader.getPropertyValue("delimiter");
+    private final static String fileName = ConfigurationLoader.getPropertyValue("sourceFile");
     Flights flights;
     List<List<String>> result;
+    static Handler fileHandler = null;
+    private static final Logger LOGGER = Logger.getLogger(ReadScheduler.class
+            .getClass().getName());
+
+    public static void setup() {
+        try {
+            fileHandler = new FileHandler("logs/logfile.log");
+            SimpleFormatter simple = new SimpleFormatter();
+            fileHandler.setFormatter(simple);
+            LOGGER.addHandler(fileHandler);
+            LOGGER.setUseParentHandlers(false);
+        } catch (IOException e) {
+        }
+    }
 
     public DataReader(Flights flights) {
         this.flights = flights;
+        setup();
     }
 
     public synchronized void readData(Flights flights) throws IOException {
+        LOGGER.info("Reading...");
         result = Files.readAllLines(Paths.get(fileName))
                 .stream()
                 .map(line -> Arrays.asList(line.split(PIPE_DELIMITER)))

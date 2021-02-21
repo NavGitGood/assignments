@@ -12,6 +12,7 @@ public class ReadScheduler {
 
     BufferedReader reader;
     Flights flights;
+    private final static long refreshPeriod = Long.parseLong(ConfigurationLoader.getPropertyValue("refreshPeriodInSeconds"));
 
     public ReadScheduler() throws IOException {
         reader = new BufferedReader(new InputStreamReader(System.in));
@@ -23,9 +24,10 @@ public class ReadScheduler {
         ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
         DataReader task1 = new DataReader(obj.flights);
 
-        ScheduledFuture<?> result = executor.scheduleAtFixedRate(task1, 2, 2, TimeUnit.SECONDS);
+        ScheduledFuture<?> result = executor.scheduleAtFixedRate(task1, 2, refreshPeriod, TimeUnit.SECONDS);
 
         boolean running = true;
+        System.out.println(ConfigurationLoader.getPropertyValue("refreshPeriodInSeconds"));
         System.out.println("What would you like to perform!");
         while (running) {
             System.out.println("1. Search a flight");
@@ -44,6 +46,7 @@ public class ReadScheduler {
                 case "3":
                     System.out.println("Thank you");
                     running = false;
+                    executor.shutdown();
                     break;
 
                 default:
