@@ -26,7 +26,7 @@ public class Main {
                     break;
 
                 case "2":
-                    obj.printStudentS();
+                    obj.printStudents();
                     break;
 
                 case "3":
@@ -55,7 +55,7 @@ public class Main {
         }
     }
 
-    public void printStudentS() {
+    public void printStudents() {
         System.out.println(students.toString());
     }
 }
