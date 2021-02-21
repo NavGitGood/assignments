@@ -1,37 +1,41 @@
 package com.flight.system;
 
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Flights {
 
-    private List<Flight> flights = new ArrayList<Flight>();
+    private Set<Flight> flights = new HashSet<Flight>();
 
     public boolean addFlight(Flight flight) {
         return flights.add(flight);
     }
 
+    public Date dateParser(String date) throws ParseException {
+        return new SimpleDateFormat("dd-MM-yyyy").parse(date);
+    }
+
     public List<Flight> searchFlights(String dep_loc, String arr_loc, String date) {
-        return flights.stream()
+        List<Flight> search = flights.stream()
                 .filter(flight -> {
                     try {
                         return flight.getDep_loc().equals(dep_loc) &&
                                 flight.getArr_loc().equals(arr_loc) &&
-                                flight.getValid_till().equals(DateFormat.getDateInstance().parse(date));
-                    } catch (ParseException e) {
+                                flight.getValid_till().getTime() == dateParser(date).getTime();
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                     return false;
                 })
                 .collect(Collectors.toList());
+        return search;
     }
 
     @Override
     public String toString() {
-        return "Students:\n"
+        return "Flights:\n"
                 + flights.stream()
                 .map(flight -> "Flight No.: " + flight.getFlight_no() + "\n" +
                                 "Departure Location: " + flight.getDep_loc() + "\n" +
@@ -43,6 +47,10 @@ public class Flights {
                                 "Seat Availability: " + flight.isSeat_avl() + "\n"
                 )
                 .collect(Collectors.joining());
+    }
+
+    public Integer getTotalFlights() {
+        return flights.size();
     }
 
 }

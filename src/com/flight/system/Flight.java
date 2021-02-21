@@ -1,7 +1,6 @@
 package com.flight.system;
 
 import java.util.Date;
-import java.util.List;
 
 public class Flight {
     private String flight_no;
@@ -22,10 +21,6 @@ public class Flight {
         this.flight_dur = flight_dur;
         this.fare = fare;
         this.seat_avl = seat_avl;
-    }
-
-    public void flightMapper(List<String> data) {
-
     }
 
     public String getFlight_no() {
@@ -60,8 +55,6 @@ public class Flight {
         return seat_avl;
     }
 
-
-
     @Override
     public String toString() {
         return "Flight{" +
@@ -74,5 +67,15 @@ public class Flight {
                 ", fare=" + fare +
                 ", seat_avl=" + seat_avl +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return !super.equals(obj);
+    }
+
+    @Override
+    public int hashCode() {
+        return toString().hashCode();
     }
 }
