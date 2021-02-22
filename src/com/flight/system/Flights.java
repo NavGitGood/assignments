@@ -13,17 +13,13 @@ public class Flights {
         return flights.add(flight);
     }
 
-    public Date dateParser(String date) throws ParseException {
-        return new SimpleDateFormat("dd-MM-yyyy").parse(date);
-    }
-
     public List<Flight> searchFlights(String dep_loc, String arr_loc, String date) {
         List<Flight> search = flights.stream()
                 .filter(flight -> {
                     try {
                         return flight.getDep_loc().equals(dep_loc) &&
                                 flight.getArr_loc().equals(arr_loc) &&
-                                flight.getValid_till().getTime() == dateParser(date).getTime();
+                                flight.getValid_till().getTime() == Utilities.dateParser(date).getTime();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
