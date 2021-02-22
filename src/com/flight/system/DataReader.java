@@ -55,10 +55,6 @@ public class DataReader implements Runnable {
         return result;
     }
 
-    public Date dateParser(String date) throws ParseException {
-        return new SimpleDateFormat("dd-MM-yyyy").parse(date);
-    }
-
     public void makeObject(List<List<String>> result, Flights flights) {
         result.remove(0);
         result.stream()
@@ -78,7 +74,7 @@ public class DataReader implements Runnable {
                 data.get(0),
                 data.get(1),
                 data.get(2),
-                dateParser(data.get(3)),
+                Utilities.dateParser(data.get(3)),
                 data.get(4),
                 Float.parseFloat(data.get(5)),
                 Integer.parseInt(data.get(6)),

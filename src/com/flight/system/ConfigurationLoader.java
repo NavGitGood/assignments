@@ -17,12 +17,6 @@ public class ConfigurationLoader {
     }
 
     public static String getPropertyValue(String key){
-//        try(InputStream is = ClassLoader.class.getResourceAsStream("/env.properties")) {
-//            properties = new Properties();
-//            properties.load(is);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
         return properties.getProperty(key);
     }
 }
