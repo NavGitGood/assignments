@@ -18,7 +18,8 @@ public class ReadScheduler<T> {
     private final static long refreshPeriod = Long.parseLong(ConfigurationLoader.getPropertyValue("refreshPeriodInSeconds"));
     private Pattern dayOrMonth = Pattern.compile("^\\d{1,2}$");
     private Pattern year = Pattern.compile("^\\d{4}$");
-    Predicate<String> isThreeLetterCode = i -> i.length() == 3;
+    private Pattern threeCharacters = Pattern.compile("^[A-Z]{3}$");
+    Predicate<String> isThreeLetterCode = i -> threeCharacters.matcher(i).matches();//i.length() == 3;
     Predicate<String> hasValidFormat = i -> i.split("-").length == 3;
     Predicate<String> isValidDay = i -> dayOrMonth.matcher(i.split("-")[0]).matches() && Integer.parseInt(i.split("-")[0]) <= 31;
     Predicate<String> isValidMonth = i -> dayOrMonth.matcher(i.split("-")[1]).matches() && Integer.parseInt(i.split("-")[1]) <= 12;
