@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.attribute.BasicFileAttributes;
-import java.nio.file.attribute.FileTime;
 import java.text.ParseException;
 import java.util.Arrays;
 import java.util.List;
@@ -22,7 +21,7 @@ public class DataReader implements Runnable {
     Flights flights;
     List<List<String>> result;
     Handler fileHandler = null;
-    public long lastModifiedTime = Long.parseLong(ConfigurationLoader.getPropertyValue("timeInMs1980"));//315513000000L; //01-01-1980
+    public long lastModifiedTime = Long.parseLong(ConfigurationLoader.getPropertyValue("timeInMs1980"));
     private static final Logger LOGGER = Logger.getLogger(ReadScheduler.class
             .getClass().getName());
 
@@ -50,7 +49,6 @@ public class DataReader implements Runnable {
     public synchronized void readData(Flights flights) throws IOException {
         if (lastModifiedTime < getLastModifiedTime()) {
             LOGGER.info("Reading...");
-            System.out.println("Reading...");
             lastModifiedTime = getLastModifiedTime();
             result = Files.readAllLines(Paths.get(fileName))
                     .stream()
