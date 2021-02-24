@@ -1,6 +1,6 @@
 # Assignment
 
-* Steps to run the code *
+*Steps to run the code*
 1. Run `ReadScheduler.java`
 2. On the Interactive Console, there will be three options
     - `Search flights` press 1 to search flights
