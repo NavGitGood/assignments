@@ -3,6 +3,7 @@ package com.flight.system;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -77,8 +78,11 @@ public class ReadScheduler<T> {
             System.out.println("Invalid input!!");
             return;
         }
-        flights.searchFlights(depLoc, arrLoc, flightDate)
-                .stream()
+        List<Flight> result = flights.searchFlights(depLoc, arrLoc, flightDate);
+        if (result.isEmpty()) {
+            System.out.println("Sorry, no flights available for your query!!\n");
+        }
+        result.stream()
                 .forEach(System.out::println);
     }
 

@@ -25,6 +25,8 @@
 
 *Assumptions*
 - Rows can be deleted from source file, this is handled by purging the Flights set everytime file is read
+- a flight detail would be returned in search result only when :
+   - depLoc, arrLoc and flightDate exactly matches (seat availability does not matter at this point)
 
 *Further improvements needed:*
 - explore better way to handle deletions (instead of purging the set each time)
