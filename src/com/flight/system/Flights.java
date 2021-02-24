@@ -1,13 +1,15 @@
 package com.flight.system;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class Flights {
 
     private Set<Flight> flights = new HashSet<Flight>();
+
+    public void purgeSet() {
+        flights.clear();
+    }
 
     public boolean addFlight(Flight flight) {
         return flights.add(flight);
@@ -19,14 +21,20 @@ public class Flights {
                     try {
                         return flight.getDep_loc().equals(dep_loc) &&
                                 flight.getArr_loc().equals(arr_loc) &&
+//                                flight.isSeat_avl() &&
                                 flight.getValid_till().getTime() == Utilities.dateParser(date).getTime();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
                     return false;
                 })
+                .sorted(Comparator.comparing(o -> o.getFare()))
                 .collect(Collectors.toList());
         return search;
+    }
+
+    public Set<Flight> getAllFlights() {
+        return flights;
     }
 
     @Override

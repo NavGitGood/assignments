@@ -13,11 +13,11 @@ import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 import java.util.stream.Collectors;
 
-
 public class DataReader implements Runnable {
 
     private final static String PIPE_DELIMITER = ConfigurationLoader.getPropertyValue("delimiter");
     private final static String fileName = ConfigurationLoader.getPropertyValue("sourceFile");
+    private final static String logFile = ConfigurationLoader.getPropertyValue("logFile");
     Flights flights;
     List<List<String>> result;
     Handler fileHandler = null;
@@ -32,7 +32,7 @@ public class DataReader implements Runnable {
 
     public void setup() {
         try {
-            fileHandler = new FileHandler("logs/logfile.log");
+            fileHandler = new FileHandler(logFile, true);
             SimpleFormatter simple = new SimpleFormatter();
             fileHandler.setFormatter(simple);
             LOGGER.addHandler(fileHandler);
@@ -65,6 +65,7 @@ public class DataReader implements Runnable {
 
     public void makeObject(List<List<String>> result, Flights flights) {
         result.remove(0);
+        flights.purgeSet();
         result.stream()
                 .map(data -> {
                     try {

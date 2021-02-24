@@ -9,7 +9,7 @@ public class Flight {
     private Date valid_till;
     private String flight_time;
     private float flight_dur;
-    private int fare;
+    private Integer fare;
     private boolean seat_avl;
 
     public Flight(String flight_no, String dep_loc, String arr_loc, Date valid_till, String flight_time, float flight_dur, int fare, boolean seat_avl) {
@@ -47,7 +47,7 @@ public class Flight {
         return flight_dur;
     }
 
-    public int getFare() {
+    public Integer getFare() {
         return fare;
     }
 

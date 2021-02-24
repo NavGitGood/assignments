@@ -3,10 +3,10 @@ package com.flight.system;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Predicate;
 import java.util.regex.Pattern;
@@ -26,7 +26,7 @@ public class ReadScheduler<T> {
     Predicate<String> isValidYear = i -> year.matcher(i.split("-")[2]).matches() && 2000 <= Integer.parseInt(i.split("-")[2]) && Integer.parseInt(i.split("-")[2]) <= 2500;
     Predicate<String> isValidDate = hasValidFormat.and(isValidDay).and(isValidMonth).and(isValidYear);
 
-    public ReadScheduler() throws IOException {
+    public ReadScheduler() {
         reader = new BufferedReader(new InputStreamReader(System.in));
         flights = new Flights();
     }
@@ -34,16 +34,15 @@ public class ReadScheduler<T> {
     public static void main(String[] args) throws IOException {
         ReadScheduler obj = new ReadScheduler();
         ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
-        DataReader task1 = new DataReader(obj.flights);
+        DataReader readTask = new DataReader(obj.flights);
 
-        ScheduledFuture<?> result = executor.scheduleAtFixedRate(task1, 2, refreshPeriod, TimeUnit.SECONDS);
+        executor.scheduleAtFixedRate(readTask, 0, refreshPeriod, TimeUnit.SECONDS);
 
         boolean running = true;
-        System.out.println(ConfigurationLoader.getPropertyValue("refreshPeriodInSeconds"));
         System.out.println("What would you like to perform!");
         while (running) {
-            System.out.println("1. Search a flight");
-            System.out.println("2. Print size");
+            System.out.println("1. Search flights");
+            System.out.println("2. Print all flights");
             System.out.println("3. Exit");
             switch (obj.reader.readLine()) {
 
@@ -52,7 +51,7 @@ public class ReadScheduler<T> {
                     break;
 
                 case "2":
-                    obj.printFlights();
+                    obj.printAllFlights();
                     break;
 
                 case "3":
@@ -79,11 +78,18 @@ public class ReadScheduler<T> {
             System.out.println("Invalid input!!");
             return;
         }
-        System.out.println(flights.searchFlights(depLoc, arrLoc, flightDate));
+        List<Flight> result = flights.searchFlights(depLoc, arrLoc, flightDate);
+        if (result.isEmpty()) {
+            System.out.println("Sorry, no flights available for your query!!\n");
+        }
+        result.stream()
+                .forEach(System.out::println);
     }
 
-    public void printFlights() {
-//        System.out.println(flights.toString());
+    public void printAllFlights() {
+        flights.getAllFlights()
+                .stream()
+                .forEach(System.out::println);
         System.out.println(flights.getTotalFlights());
     }
 }
