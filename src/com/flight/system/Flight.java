@@ -65,7 +65,7 @@ public class Flight {
                 ", flight_time='" + flight_time + '\'' +
                 ", flight_dur='" + flight_dur + '\'' +
                 ", fare=" + fare +
-                ", seat_avl=" + seat_avl +
+                ", seat_avl=" + (seat_avl ? "Yes" : "No") +
                 '}';
     }
 
