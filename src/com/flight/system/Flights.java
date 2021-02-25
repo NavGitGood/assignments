@@ -21,7 +21,7 @@ public class Flights {
                     try {
                         return flight.getDep_loc().equals(dep_loc) &&
                                 flight.getArr_loc().equals(arr_loc) &&
-//                                flight.isSeat_avl() &&
+                                flight.isSeat_avl() &&
                                 flight.getValid_till().getTime() == Utilities.dateParser(date).getTime();
                     } catch (Exception e) {
                         e.printStackTrace();
