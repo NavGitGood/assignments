@@ -1,5 +1,6 @@
 package com.flight.system;
 
+import java.text.DecimalFormat;
 import java.util.Date;
 
 public class Flight {
@@ -61,12 +62,13 @@ public class Flight {
                 "flight_no='" + flight_no + '\'' +
                 ", dep_loc='" + dep_loc + '\'' +
                 ", arr_loc='" + arr_loc + '\'' +
-                ", valid_till='" + valid_till + '\'' +
+                ", valid_till='" + Utilities.dateFormatter(valid_till) + '\'' +
                 ", flight_time='" + flight_time + '\'' +
-                ", flight_dur='" + flight_dur + '\'' +
-                ", fare=" + fare +
-                ", seat_avl=" + (seat_avl ? "Yes" : "No") +
+                ", flight_dur='" + flight_dur + " hrs\'" +
+                ", fare='" + "INR " + new DecimalFormat("##,##,###").format(fare) + '\'' +
+                ", seat_avl='" + (seat_avl ? "Yes" : "No") + '\'' +
                 '}';
+
     }
 
     @Override
