@@ -40,3 +40,16 @@
 - add tests
 - use better date validation (*current implementation is to showcase the use of functional interfaces which we learnt in a screening workshop*). 
 
+***Highlights***
+1. Result is formatted. Some examples:
+   - fare as INR 4,900 instead of just 4900
+   - date in dd-mm-yyyy format instead of datetime
+   - seat availability as Yes/No instead of Y/N
+2. File is read (at given interval) only if there was a modification
+3. Logging is used to determine when the file was read
+4. Use of Configurable parameters
+5. Use of functional interfaces (for input validation), lambda functions and method references
+6. Source file sanitization
+   - ignoring lines with just white spaces
+   - ignoring duplicate records
+7. User Input is Case-Insensitive

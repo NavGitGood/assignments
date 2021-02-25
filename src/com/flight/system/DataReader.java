@@ -22,8 +22,7 @@ public class DataReader implements Runnable {
     List<List<String>> result;
     Handler fileHandler = null;
     public long lastModifiedTime = Long.parseLong(ConfigurationLoader.getPropertyValue("timeInMs1980"));
-    private static final Logger LOGGER = Logger.getLogger(ReadScheduler.class
-            .getClass().getName());
+    private static final Logger LOGGER = Logger.getLogger(ReadScheduler.class.getName());
 
     public long getLastModifiedTime() throws IOException {
         BasicFileAttributes attr = Files.readAttributes(Paths.get(fileName), BasicFileAttributes.class);
@@ -38,6 +37,7 @@ public class DataReader implements Runnable {
             LOGGER.addHandler(fileHandler);
             LOGGER.setUseParentHandlers(false);
         } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -57,10 +57,6 @@ public class DataReader implements Runnable {
                     .collect(Collectors.toList());
             makeObject(result, flights);
         }
-    }
-
-    public synchronized List<List<String>> getResult() {
-        return result;
     }
 
     public void makeObject(List<List<String>> result, Flights flights) {

@@ -11,4 +11,8 @@ public final class Utilities {
     public static Date dateParser(String date) throws ParseException {
         return new SimpleDateFormat("dd-mm-yyyy").parse(date);
     }
+
+    public static String dateFormatter(Date date) {
+        return new SimpleDateFormat("dd-mm-yyyy").format(date);
+    }
 }
