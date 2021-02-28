@@ -52,6 +52,7 @@ public class DataReader implements Runnable {
         setup();
     }
 
+    //read lines from source CSV file given that the file was modified after previous read operation
     public synchronized void readData(Flights flights) throws IOException {
         if (lastModifiedTime < getLastModifiedTime()) {
             LOGGER.info("Reading...");
@@ -65,6 +66,7 @@ public class DataReader implements Runnable {
         }
     }
 
+    //map each give line (except 1st) into a Flight object and add them into Flights object
     public void makeObject(List<List<String>> result, Flights flights) {
         result.remove(0);
         flights.purgeSet();
@@ -80,6 +82,7 @@ public class DataReader implements Runnable {
                 .forEach(flights::addFlight);
     }
 
+    //mapping delimited data from source file to flight object
     public Flight mapper(List<String> data) throws ParseException {
         return new Flight(
                 data.get(0),

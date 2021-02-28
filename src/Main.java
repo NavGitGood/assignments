@@ -2,13 +2,16 @@ import com.flight.system.DataReader;
 import com.flight.system.Flight;
 import com.flight.system.Flights;
 import com.flight.system.ReadScheduler;
+import com.flight.system.util.Utilities;
 import com.flight.system.util.Validator;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.stream.Collectors;
 
 public class Main {
 
@@ -69,15 +72,20 @@ public class Main {
         if (result.isEmpty()) {
             System.out.println("Sorry, no flights available for your query!!\n");
         }
-        result.stream()
-                .forEach(System.out::println);
+        else {
+            printAsTable(result);
+        }
     }
 
     public void printAllFlights() {
-        flights.getAllFlights()
-                .stream()
-                .forEach(System.out::println);
-        System.out.println(flights.getTotalFlights());
+        printAsTable(new ArrayList<>(flights.getAllFlights()));
+    }
+
+    public void printAsTable(List<Flight> dataToPrint) {
+        List<List<String>> dataList = dataToPrint.stream()
+                .map(Flight::simpleFlightObject)
+                .collect(Collectors.toList());
+        Utilities.prettyPrint(Flight.columns(), dataList);
     }
 
 }

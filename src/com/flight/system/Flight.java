@@ -2,8 +2,13 @@ package com.flight.system;
 
 import com.flight.system.util.Utilities;
 
+import java.lang.reflect.Array;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
+
 /**
  * The Flight class defines the structure of a flight
  */
@@ -73,6 +78,30 @@ public class Flight {
                 ", seat_avl='" + (seat_avl ? "Yes" : "No") + '\'' +
                 '}';
 
+    }
+
+    public static List<String> columns() {
+        return Arrays.asList("Flight Number",
+                "Departure Location",
+                "Arrival Location",
+                "Flight Date",
+                "Flight Time",
+                "Flight Duration (hrs)",
+                "Fare (INR)",
+                "Seat Availability");
+    }
+
+    public List<String> simpleFlightObject() {
+        return Arrays.asList(
+                flight_no,
+                dep_loc,
+                arr_loc,
+                Utilities.dateFormatter(valid_till),
+                flight_time,
+                Float.toString(flight_dur),
+                new DecimalFormat("##,##,###").format(fare),
+                (seat_avl ? "Yes" : "No")
+        );
     }
 
     @Override
