@@ -1,3 +1,5 @@
+package com.student.info;
+
 import java.util.Locale;
 
 public class Student {

@@ -1,4 +1,4 @@
-package com.flight.system;
+package com.flight.system.util;
 
 import java.io.IOException;
 import java.io.InputStream;

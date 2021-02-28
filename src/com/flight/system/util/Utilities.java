@@ -1,4 +1,4 @@
-package com.flight.system;
+package com.flight.system.util;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
