@@ -31,7 +31,7 @@ public class Main {
         boolean running = true;
         System.out.println("What would you like to perform!");
         while (running) {
-            System.out.println("1. Search flights");
+            System.out.println("\n1. Search flights");
             System.out.println("2. Print all flights");
             System.out.println("3. Exit");
             switch (obj.reader.readLine()) {
@@ -62,7 +62,7 @@ public class Main {
         String depLoc = this.reader.readLine().toUpperCase(Locale.ROOT);
         System.out.println("Enter Arrival Location!");
         String arrLoc = this.reader.readLine().toUpperCase(Locale.ROOT);
-        System.out.println("Enter Flight Date (dd-mm-yyyy)!");
+        System.out.println("Enter Flight Date (dd-MM-yyyy)!");
         String flightDate = this.reader.readLine().toUpperCase(Locale.ROOT);
         if (!Validator.isThreeLetterCode.test(depLoc) || !Validator.isThreeLetterCode.test(arrLoc) || !Validator.isValidDate.test(flightDate)) {
             System.out.println("Invalid input!!");
