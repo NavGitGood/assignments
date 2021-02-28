@@ -16,6 +16,9 @@ import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 import java.util.stream.Collectors;
 
+/**
+ * The DataReader class is used to read flight details from given source file into Flights object
+ */
 public class DataReader implements Runnable {
 
     private final static String PIPE_DELIMITER = ConfigurationLoader.getPropertyValue("delimiter");

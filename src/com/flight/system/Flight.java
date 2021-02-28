@@ -4,7 +4,9 @@ import com.flight.system.util.Utilities;
 
 import java.text.DecimalFormat;
 import java.util.Date;
-
+/**
+ * The Flight class defines the structure of a flight
+ */
 public class Flight {
     private String flight_no;
     private String dep_loc;

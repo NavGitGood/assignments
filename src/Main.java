@@ -1,3 +1,4 @@
+import com.flight.system.DataReader;
 import com.flight.system.Flight;
 import com.flight.system.Flights;
 import com.flight.system.ReadScheduler;
@@ -21,7 +22,8 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         Main obj = new Main();
-        ReadScheduler rs = new ReadScheduler(obj.flights);
+        DataReader readTask = new DataReader(obj.flights);
+        ReadScheduler rs = new ReadScheduler(readTask);
 
         boolean running = true;
         System.out.println("What would you like to perform!");

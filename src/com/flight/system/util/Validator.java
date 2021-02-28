@@ -3,6 +3,9 @@ package com.flight.system.util;
 import java.util.function.Predicate;
 import java.util.regex.Pattern;
 
+/**
+ * The Validator class provides various predicate functions for validating user input
+ */
 public class Validator {
 
     private static Pattern dayOrMonth = Pattern.compile("^\\d{1,2}$");

@@ -5,6 +5,10 @@ import com.flight.system.util.Utilities;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * The Flights class is used to add different flights together in a Set and
+ * run different operations over that Set, like searching a flight, returning all the flights
+ */
 public class Flights {
 
     private Set<Flight> flights = new HashSet<Flight>();
