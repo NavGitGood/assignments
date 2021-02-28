@@ -1,9 +1,13 @@
-package com.flight.system;
+package com.flight.system.util;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+/**
+ * The ConfigurationLoader class is used to read the properties file and provides a method
+ * to access different properties
+ */
 public class ConfigurationLoader {
 
     private static Properties properties;

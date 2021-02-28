@@ -1,7 +1,7 @@
 # Assignment
 
 ***Steps to run the code***
-1. Run `ReadScheduler.java`
+1. Run `Main.java`
 2. On the Interactive Console, there will be three options
     - `Search flights` press 1 to search flights
     - `Print all flights` press 2 to print all flights (as present in source file)
@@ -43,7 +43,7 @@
 ***Highlights***
 1. Result is formatted. Some examples:
    - fare as INR 4,900 instead of just 4900
-   - date in dd-mm-yyyy format instead of datetime
+   - date in dd-MM-yyyy format instead of datetime
    - seat availability as Yes/No instead of Y/N
 2. File is read (at given interval) only if there was a modification
 3. Logging is used to determine when the file was read
@@ -53,3 +53,4 @@
    - ignoring lines with just white spaces
    - ignoring duplicate records
 7. User Input is Case-Insensitive
+8. Console output is tabular
